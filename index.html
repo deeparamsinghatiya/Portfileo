@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Portfolio</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #38bdf8;
+            --muted: #94a3b8;
+            --bg: #0f172a;
+        }
+
+        /* Container Utility */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #0f172a;
+            color: #fff;
+            /* Subtle background gradient */
+            background-image:url('https://in.pinterest.com/pin/617274692677127368/');
+            background-size: cover;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            height: 80px;
+        }
+
+        header h1 {
+            color: #38bdf8;
+        }
+
+        nav a {
+            display: inline-block;
+            color: #fff;
+            text-decoration: none;
+            margin-left: 25px;
+            position: relative;
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #38bdf8;
+            left: 0;
+            bottom: -5px;
+            transition: 0.4s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 120px 80px;
+            background-size: cover;
+        }
+
+        .hero-text h2 {
+            font-size: 48px;
+        }
+
+        .hero-text span {
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text p {
+            margin: 20px 0;
+            color: #cbd5e1;
+        }
+
+        /* Hero Animations */
+        @keyframes slideLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .btn {
+            padding: 14px 32px;
+            background: #38bdf8;
+            color: #0f172a;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            border: 2px solid #38bdf8;
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 20px #38bdf8;
+            transform: scale(1.05);
+        }
+
+        .btn.secondary {
+            background: transparent;
+            color: #38bdf8;
+            margin-left: 10px;
+        }
+
+        .hero-img {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            background: url("deepu.png");
+            background-size: cover;
+            box-shadow: 0 5px 40px #38bdf8;
+        }
+
+        /* ===== SKILLS ===== */
+        #skills {
+            /* background: #474949; */
+            margin: 60px 20px;
+            border-radius: 12px;
+        }
+
+        .skills {
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .skill {
+            margin-bottom: 25px;
+        }
+
+        .skill h3 {
+            margin-bottom: 6px;
+        }
+
+        .bar {
+            width: 100%;
+            height: 12px;
+            background: #334155;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .fill {
+            height: 100%;
+            width: 0;
+            /* Start at 0 for animation */
+            background: var(--primary);
+            transition: 1.5s;
+        }
+
+
+        /* =========================
+       PROJECTS
+       ========================= */
+        .projects-list {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .project {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .project:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.3);
+        }
+
+        .project .meta {
+            padding: 18px;
+            background: #0e1620;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .project .meta h4 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .project .meta p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .project .media {
+            height: 240px;
+            background: #0b1216;
+            display: block;
+        }
+
+        .project .media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Alternate layout on desktop */
+        @media (min-width: 900px) {
+            .project {
+                flex-direction: row;
+            }
+
+            .project:nth-child(odd) {
+                flex-direction: row-reverse;
+            }
+
+            .project .meta {
+                width: 48%;
+            }
+
+            .project .media {
+                width: 52%;
+                height: auto;
+                min-height: 320px;
+            }
+
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+        }
+
+        /* =========================
+       ABOUT
+       ========================= */
+        .about {
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 22px;
+            align-items: center;
+        }
+
+        .about .avatar {
+            width: 380px;
+            border-radius: 20px;
+            overflow: hidden;
+            color: #000;
+            /* border: 6px solid rgba(0, 0, 0, 0.06); */
+        }
+
+        .about .bio {
+            max-width: 720px;
+            text-align: center;
+        }
+
+        @media (min-width: 900px) {
+            .about {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .about .bio {
+                text-align: left;
+            }
+        }
+
+        /* =========================
+       CONTACT
+       ========================= */
+        .contact-grid {
+            display: grid;
+            gap: 18px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+
+        .contact-card {
+            background: linear-gradient(180deg,
+                    rgba(255, 255, 255, 0.02),
+                    rgba(255, 255, 255, 0.01));
+            padding: 18px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.3);
+        }
+
+        .contact-card h5 {
+            margin: 6px 0 2px;
+        }
+
+        .contact-card p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        /* =========================
+       FOOTER
+       ========================= */
+        footer {
+            background: linear-gradient(90deg,
+                    rgba(104, 118, 237, 0.12),
+                    rgba(79, 176, 255, 0.08));
+            padding: 48px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            margin-top: 10px;
+        }
+
+        .footer-inner {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+            text-align: center;
+        }
+
+        .socials {
+            display: flex;
+            gap: 12px;
+        }
+
+        .socials a img {
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            filter: grayscale(1);
+            transition: filter 0.2s;
+        }
+
+        .socials a:hover img {
+            filter: none;
+        }
+
+        /* small tweaks */
+        .muted {
+            color: var(--muted);
+        }
+
+        .accent {
+            color: var(--primary);
+        }
+
+        .stack {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        /* responsive header nav show/hide */
+        @media (min-width: 1000px) {
+            .hamb {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 999px) {
+            header nav {
+                display: none;
+            }
+
+            .hamb {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                background: none;
+                border: none;
+                cursor: pointer;
+            }
+
+            .hamb span {
+                width: 30px;
+                height: 3px;
+                background: #fff;
+                border-radius: 2px;
+            }
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #0f172a;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.open {
+            transform: translateY(0);
+        }
+
+        .mobile-menu a {
+            font-size: 1.5rem;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* prefer reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .hero .name-anim .fill {
+                animation: none;
+                width: 100%;
+            }
+
+            * {
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+
+        /* About Image Styling */
+        #deepu {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .hero-text {
+            animation: slideLeft 1s ease forwards;
+        }
+
+        /* Scroll Reveal Class */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .deepu{
+            background-image: url('https://in.pinterest.com/pin/99149629288850637/');
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Deeparam</h1>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <button id="hamb" class="hamb" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+<div class="deepu">
+        <div class="hero" id="home">
+            <div class="hero-text">
+                <h2>Hi, I'm <span>Web Developer</span></h2>
+                <p>I build fast, modern and animated websites.</p>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdHioTFI8MQIOUXfy6RxjRC0pHlj2to0FtImU52dFHW83wwZQ/viewform?usp=header"
+                    class="btn">Hire Me</a>
+            </div>
+            <div class="hero-img"></div>
+        </div>
+
+</div>
+        <!-- PROJECTS -->
+        <!-- ABOUT -->
+        <section id="about" class="container" aria-labelledby="aboutTitle" style="margin-top: 80px;">
+            <div style="max-width: 920px; margin: 0 auto; text-align: center">
+                <h3 id="aboutTitle" class="section-title">About Me</h3>
+                <p class="section-sub muted">
+                    Passionate web developer building clean, accessible and performant
+                    digital products.
+                </p>
+            </div>
+
+            <div class="container">
+                <div class="about">
+                    <div class="avatar">
+                        <img src="deepu.png" id="deepu"
+                            alt="Deeparam Singhatiya" />
+                    </div>
+                    <div class="bio">
+                        <h4 style="margin-bottom: 8px">I'm Deeparam Singhatiya — Web Developer</h4>
+                        <p class="muted">
+                            I specialize in building modern websites and web apps using best
+                            practices — responsive layouts, clean code, and strong UX. I
+                            enjoy solving problems, learning new tech, and shipping products
+                            that people love. My toolset includes HTML, CSS, JavaScript,
+                            Java backend, and modern frontend libraries.
+                        </p>
+                        <div style="margin-top: 16px" class="stack">
+                            <a class="btn" href="#">Download CV</a>
+                            <a class="btn secondary" href="#contact">Contact</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="container">
+            <div style="max-width: 920px; margin: 0 auto; text-align: center; margin-bottom: 40px;">
+                <h3 class="section-title">Skills</h3>
+            </div>
+            <div class="skills">
+                <div class="skill">
+                    <h3>HTML</h3>
+                    <div class="bar">
+                        <div class="fill" data-width="95%"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <h3>CSS</h3>
+                    <div class="bar">
+                        <div class="fill" data-width="90%"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <h3>JavaScript</h3>
+                    <div class="bar">
+                        <div class="fill" data-width="75%"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="container" aria-labelledby="projectsTitle">
+            <div style="max-width: 920px; margin: 0 auto; text-align: center">
+                <h3 id="projectsTitle" class="section-title">Projects</h3>
+                <p class="section-sub muted">
+                    Some real projects demonstrating UI, JS, and backend integration.
+                </p>
+            </div>
+
+            <div class="container" style="max-width: 1100px">
+                <div class="projects-list">
+
+                    <!-- project 2 -->
+                    <article class="project" aria-labelledby="p2">
+                        <div class="meta">
+                            <h4 id="p2">Calculator App</h4>
+                            <p class="muted">
+                                Interactive calculator built with clean JS and keyboard
+                                support.
+                            </p>
+                            <div style="margin-top: 12px" class="stack">
+                                <a class="btn" href="#" aria-label="View Project">View</a>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <img src="https://i.pinimg.com/736x/f8/55/0f/f8550faf8c2d8202b4d6c5cbadd6faa4.jpg"
+                                alt="Calculator project screenshot" />
+                        </div>
+                    </article>
+
+                    <!-- project 3 -->
+                    <article class="project" aria-labelledby="p3">
+                        <div class="meta">
+                            <h4 id="p3">Login Page</h4>
+                            <p class="muted">
+                                Secure login UI with validation and responsive design.
+                            </p>
+                            <div style="margin-top: 12px" class="stack">
+                                <a class="btn" href="#" aria-label="View Project">View</a>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <img src="https://i.pinimg.com/736x/fb/80/63/fb8063978783344291bfc27bc11fd109.jpg"
+                                alt="Login page screenshot" />
+                        </div>
+                    </article>
+
+                    <!-- project 4 -->
+                    <article class="project" aria-labelledby="p4">
+                        <div class="meta">
+                            <h4 id="p4">Code Billing System</h4>
+                            <p class="muted">
+                                Billing & invoice generation tool for small businesses.
+                            </p>
+                            <div style="margin-top: 12px" class="stack">
+                                <a class="btn" href="#" aria-label="View Project">View</a>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <img src="https://i.pinimg.com/736x/93/c0/0f/93c00f395f9814b44d39b435725669ef.jpg"
+                                alt="Billing system screenshot" />
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="container" aria-labelledby="contactTitle">
+            <div style="max-width: 920px; margin: 0 auto; text-align: center">
+                <h3 id="contactTitle" class="section-title">Contact Info</h3>
+                <p class="section-sub muted">
+                    Feel free to reach out for work, collaborations or just to say hi.
+                </p>
+            </div>
+
+            <div class="container" style="max-width: 1100px">
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <img src="https://i.pinimg.com/736x/bd/1f/24/bd1f24dc9e46e56fdcadd72bd3d50525.jpg" alt="" style="
+                  width: 64px;
+                  height: 64px;
+                  margin: 0 auto;
+                  border-radius: 8px;
+                " />
+                        <h5>Email</h5>
+                        <p class="muted">deeparamsinghatiya@gmail.com</p>
+                    </div>
+                    <div class="contact-card">
+                        <img src="https://i.pinimg.com/1200x/09/96/e7/0996e72cddf927f75fb0b830b0dbf591.jpg" alt=""
+                            style="
+                  width: 64px;
+                  height: 64px;
+                  margin: 0 auto;
+                  border-radius: 8px;
+                " />
+                        <h5>Phone</h5>
+                        <p class="muted">+91 9672760574</p>
+                    </div>
+                    <div class="contact-card">
+                        <img src="https://i.pinimg.com/736x/c3/d5/46/c3d546e24f48b489e3a1a85b43a37e59.jpg" alt="" style="
+                  width: 64px;
+                  height: 64px;
+                  margin: 0 auto;
+                  border-radius: 8px;
+                " />
+                        <h5>Location</h5>
+                        <p class="muted">Nawa City, Rajasthan, India</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container footer-inner">
+            <div class="brand" style="font-size: 1.2rem">
+                <span class="accent">Deeparam Singhatiya</span>
+            </div>
+            <div class="muted">
+                Web Developer — building clean responsive experiences
+            </div>
+            <div class="socials" aria-label="Social links">
+                <a href="https://www.facebook.com/" target="_blank" rel="noopener"><img alt="facebook"
+                        src="https://i.pinimg.com/1200x/3d/87/df/3d87df1dbf73f377043d841be99a2c67.jpg" /></a>
+                <a href="https://www.instagram.com/" target="_blank" rel="noopener"><img alt="instagram"
+                        src="https://i.pinimg.com/736x/27/6b/f8/276bf8617ae91da28c3e19ddf7ce8b59.jpg" /></a>
+                <a href="https://www.youtube.com/" target="_blank" rel="noopener"><img alt="youtube"
+                        src="https://i.pinimg.com/736x/49/b6/13/49b613edd3de97022c217ff1918d4c8b.jpg" /></a>
+                <a href="https://x.com/" target="_blank" rel="noopener"><img alt="x"
+                        src="https://i.pinimg.com/736x/08/e0/2f/08e02f24f061a549c528d0c9fa871c24.jpg" /></a>
+            </div>
+            <div style="font-size: 0.95rem; color: var(--muted)">
+                copyright © <span id="year"></span> Deeparam Singhatiya
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // small utilities: mobile nav toggle + set year + reveal on scroll
+        (function () {
+            const hamb = document.getElementById("hamb");
+            const mobile = document.getElementById("mobileMenu");
+            const yearEl = document.getElementById("year");
+            yearEl.textContent = new Date().getFullYear();
+
+            function toggleNav() {
+                const open = mobile.classList.toggle("open");
+                hamb.setAttribute("aria-expanded", open ? "true" : "false");
+                mobile.setAttribute("aria-hidden", open ? "false" : "true");
+            }
+            function closeNav() {
+                mobile.classList.remove("open");
+                hamb.setAttribute("aria-expanded", "false");
+                mobile.setAttribute("aria-hidden", "true");
+            }
+            window.closeNav = closeNav;
+            hamb.addEventListener("click", toggleNav);
+
+            // Reveal on scroll & Skills Animation
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((e) => {
+                        if (e.isIntersecting) {
+                            // Handle Skill Bars
+                            if (e.target.classList.contains('fill')) {
+                                e.target.style.width = e.target.getAttribute('data-width');
+                            }
+                            // Handle General Fade In
+                            else {
+                                e.target.classList.add('active');
+                            }
+                            observer.unobserve(e.target);
+                        }
+                    });
+                },
+                { threshold: 0.12 }
+            );
+
+            document
+                .querySelectorAll(
+                    ".project, .contact-card, .about .bio, .section-title, .skill"
+                )
+                .forEach((el) => {
+                    el.classList.add('reveal');
+                    observer.observe(el);
+                });
+
+            // Observe skill bars separately for width animation
+            document.querySelectorAll('.fill').forEach(el => observer.observe(el));
+
+            // close mobile menu on resize for safety
+            window.addEventListener("resize", () => {
+                if (window.innerWidth >= 1000) closeNav();
+            });
+        })();
+    </script>
+
+</body>
+
+</html>
